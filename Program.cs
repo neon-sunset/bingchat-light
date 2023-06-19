@@ -7,8 +7,8 @@ var bing = new BingChatClient(new()
     Tone = BingChatTone.Creative
 });
 
-var prompt = args[0].Trim();
-Assert(prompt.Length > 0);
+var prompt = string.Join(' ', args);
+Assert(!string.IsNullOrWhiteSpace(prompt));
 
 static void Print(string text) =>
     Console.Write(text.Replace("\n", "\n\n"));
@@ -20,7 +20,8 @@ await chat
 
 while (true)
 {
-    Console.Write("Prompt: ");
+    Console.Write("\nPrompt: ");
+    Console.WriteLine();
     var input = Console.ReadLine();
     if (string.IsNullOrWhiteSpace(input))
         break;
